@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown, Search, ArrowUp } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -20,6 +19,25 @@ interface MenuCategory {
   items: MenuItem[];
   note?: string;
   bgColor?: string;
+}
+
+interface BeverageSection {
+  id: string;
+  title: string;
+  icon: string;
+  bgColor: string;
+  price: string;
+  items: string[];
+}
+
+interface LunchSpecialSection {
+  id: string;
+  title: string;
+  icon: string;
+  bgColor: string;
+  subtitle: string;
+  highPrice: string[];
+  lowPrice: string[];
 }
 
 const Menu = () => {
@@ -573,7 +591,7 @@ const Menu = () => {
   };
 
   // Lunch Specials section
-  const lunchSpecials = {
+  const lunchSpecials: LunchSpecialSection = {
     id: 'lunch-specials',
     title: 'Lunch Specials',
     icon: '☀️',
@@ -588,7 +606,7 @@ const Menu = () => {
       'Chicken Milano - Sautéed chicken with spinach in a creamy white wine sauce served over spaghetti.',
       'Chicken Pomodoro - Chicken sauteed with fresh tomatoes, basil, olive oil, garlic, light marinara, sherry wine & served over penne pasta.',
       'Fettuccini Alfredo - Creamy white wine sauce served over fettuccini.',
-      'Sausage Pepper Parmigiana - Sausage & peppers sauteed in marinara, topped with mozzarella cheese in sherry wine over spaghetti.',
+      'Sausage Pepper Parmigiana - Sausage & peppers sautéed in marinara, topped with mozzarella cheese in sherry wine over spaghetti.',
       'Chicken Cacciatore - Sauteed with mushrooms, onions, peppers in marinara, served over spaghetti.',
       'Chicken Parmigiana - Lightly breaded & topped with marinara & mozzarella cheese, served over spaghetti.',
       'Spaghetti Carbonara - Sauteed with mushrooms, ham, in a rich cream with a touch of marinara over spaghetti.',
@@ -614,7 +632,7 @@ const Menu = () => {
   };
 
   // Beverages section
-  const beverages = {
+  const beverages: BeverageSection = {
     id: 'beverages',
     title: 'Beverages',
     icon: '☕',
@@ -625,14 +643,6 @@ const Menu = () => {
       'Lemonade', 'Pink Lemonade', 'Strawberry', 'Melon Brisk Tea', 'Iced Tea', 'Coffee'
     ]
   };
-
-  // All sections combined
-  const allSections = [
-    ...menuCategories,
-    sauces,
-    { ...lunchSpecials },
-    beverages
-  ];
 
   // Navigation items
   const navItems = [
@@ -650,19 +660,21 @@ const Menu = () => {
     { id: 'beverages', label: 'Beverages', icon: '☕' }
   ];
 
-  // Filter menu items based on search
-  const filterItems = (items: MenuItem[] | string[]) => {
+  // Filter menu items based on search - with proper type checking
+  const filterMenuItems = (items: MenuItem[]) => {
     if (!searchTerm) return items;
-    return items.filter(item => {
-      if (typeof item === 'string') {
-        return item.toLowerCase().includes(searchTerm.toLowerCase());
-      }
-      return (
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.price.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()))
-      );
-    });
+    return items.filter(item => 
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.price.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+  };
+
+  const filterStringItems = (items: string[]) => {
+    if (!searchTerm) return items;
+    return items.filter(item => 
+      item.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   };
 
   // Scroll to section
@@ -757,7 +769,7 @@ const Menu = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Regular Menu Categories */}
         {menuCategories.map((category) => {
-          const filteredItems = filterItems(category.items);
+          const filteredItems = filterMenuItems(category.items);
           if (filteredItems.length === 0 && searchTerm) return null;
 
           return (
@@ -888,7 +900,7 @@ const Menu = () => {
               </h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              {beverages.items.map((beverage, index) => (
+              {filterStringItems(beverages.items).map((beverage, index) => (
                 <p key={index} className="font-lato text-espresso-700 p-2 bg-cream-50 rounded">
                   • {beverage}
                 </p>
