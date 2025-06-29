@@ -1,211 +1,364 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { ChefHat, MapPin, Phone, Mail, Clock, Star, Utensils, Heart, ArrowUp } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { toast } from "sonner";
+import MenuSection from "@/components/MenuSection";
 
 const Index = () => {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [navbarShrunk, setNavbarShrunk] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setShowScrollTop(scrollY > 300);
+      setNavbarShrunk(scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    toast.success("Thank you! We'll get back to you soon.");
+    setFormData({ name: '', email: '', message: '' });
+  };
+
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      text: "The best Italian food in Tahlequah! Been coming here for 15 years and it never disappoints.",
+      rating: 5
+    },
+    {
+      name: "Mike Rodriguez",
+      text: "Authentic flavors, generous portions, and the warmest hospitality. A true local gem!",
+      rating: 5
+    },
+    {
+      name: "Emily Chen",
+      text: "The pasta is made fresh daily and you can taste the difference. Absolutely phenomenal!",
+      rating: 5
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-cream-50">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm shadow-lg transition-all duration-300">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="font-cinzel text-2xl font-bold text-deep-red">
-              Napoli's
-            </div>
-            <div className="hidden md:flex space-x-8">
-              <a href="#home" className="font-lato text-espresso-800 hover:text-deep-red transition-colors">Home</a>
-              <a href="#about" className="font-lato text-espresso-800 hover:text-deep-red transition-colors">About</a>
-              <Link to="/menu" className="font-lato text-espresso-800 hover:text-deep-red transition-colors">Menu</Link>
-              <a href="#contact" className="font-lato text-espresso-800 hover:text-deep-red transition-colors">Contact</a>
-            </div>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        navbarShrunk ? 'bg-deep-red/95 backdrop-blur-sm py-2' : 'bg-deep-red/90 py-4'
+      }`}>
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <ChefHat className="h-8 w-8 text-gold-400" />
+            <span className="font-cinzel text-2xl font-bold text-cream-50">Napolis</span>
+          </div>
+          
+          <div className="hidden md:flex space-x-8">
+            <button 
+              onClick={() => scrollToSection('home')}
+              className="text-cream-50 hover:text-gold-400 transition-colors font-lato"
+            >
+              Home
+            </button>
+            <button 
+              onClick={() => scrollToSection('about')}
+              className="text-cream-50 hover:text-gold-400 transition-colors font-lato"
+            >
+              About
+            </button>
+            <button 
+              onClick={() => scrollToSection('menu')}
+              className="text-cream-50 hover:text-gold-400 transition-colors font-lato"
+            >
+              Menu
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="text-cream-50 hover:text-gold-400 transition-colors font-lato"
+            >
+              Contact
+            </button>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <Phone className="h-4 w-4 text-gold-400" />
+            <span className="text-cream-50 font-lato">(918) 207-0870</span>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative h-screen flex items-center justify-center text-center text-white">
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80')",
+            backgroundImage: `url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`,
           }}
-        ></div>
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4">
-          <h1 className="font-cinzel text-5xl md:text-7xl font-bold mb-6 text-shadow-lg animate-fade-in">
-            Napoli's Italian Restaurant
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 text-center text-white px-4 animate-fade-in">
+          <h1 className="font-cinzel text-6xl md:text-8xl font-bold mb-6 text-shadow-lg">
+            Napolis
           </h1>
-          <p className="font-lato text-xl md:text-2xl mb-4 animate-fade-in">
+          <p className="font-cinzel text-2xl md:text-3xl mb-4 text-gold-400">
+            Italian Restaurant
+          </p>
+          <p className="font-lato text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
             Proudly Serving Tahlequah for Over 20 Years
           </p>
-          <p className="font-lato text-lg md:text-xl mb-8 animate-fade-in">
+          <p className="font-lato text-lg mb-12 max-w-xl mx-auto opacity-90">
             Authentic Italian cuisine in a warm, family-friendly atmosphere
           </p>
-          <div className="space-x-4">
-            <Link 
-              to="/menu"
-              className="inline-block bg-deep-red hover:bg-red-700 text-white font-lato font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105"
-            >
-              View Our Menu
-            </Link>
-            <a 
-              href="#about"
-              className="inline-block bg-transparent border-2 border-white hover:bg-white hover:text-deep-red text-white font-lato font-semibold py-3 px-8 rounded-lg transition-all duration-300"
-            >
-              Learn More
-            </a>
+          <Button 
+            onClick={() => scrollToSection('about')}
+            className="bg-deep-red hover:bg-deep-red/90 text-white px-8 py-3 text-lg font-lato rounded-full transition-all duration-300 hover:scale-105"
+          >
+            Discover Our Story
+          </Button>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse" />
           </div>
         </div>
       </section>
+
+      {/* SVG Divider */}
+      <div className="relative">
+        <svg className="w-full h-12 text-olive-600" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="currentColor"></path>
+          <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="currentColor"></path>
+          <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="currentColor"></path>
+        </svg>
+      </div>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white">
+      <section id="about" className="py-20 bg-olive-50 relative">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-deep-red mb-8">
-              Our Story
-            </h2>
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="font-cinzel text-5xl font-bold text-deep-red mb-6">Our Story</h2>
             <div className="w-24 h-1 bg-gold-500 mx-auto mb-8"></div>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <p className="font-lato text-lg text-espresso-700 mb-6 leading-relaxed">
-                  For over two decades, Napoli's has been serving the Tahlequah community with authentic Italian cuisine that brings families together. Our recipes have been passed down through generations, ensuring every dish carries the traditional flavors of Italy.
-                </p>
-                <p className="font-lato text-lg text-espresso-700 mb-6 leading-relaxed">
-                  From our signature pasta dishes to our wood-fired pizzas, every meal is prepared with fresh ingredients and genuine care. We believe in creating not just great food, but lasting memories for our guests.
-                </p>
-                <p className="font-lato text-lg text-espresso-700 leading-relaxed">
-                  Thank you for making us a part of your family traditions. We look forward to serving you for many more years to come.
-                </p>
-              </div>
-              <div className="relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Italian restaurant interior"
-                  className="rounded-lg shadow-2xl"
-                />
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-gold-400 rounded-full opacity-20"></div>
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-deep-red rounded-full opacity-10"></div>
-              </div>
-            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Menu Preview Section */}
-      <section className="py-20 bg-cream-50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-deep-red mb-8">
-            Taste of Italy
-          </h2>
-          <div className="w-24 h-1 bg-gold-500 mx-auto mb-8"></div>
-          <p className="font-lato text-xl text-espresso-800 max-w-2xl mx-auto mb-12">
-            Discover our extensive menu featuring traditional Italian favorites and signature creations
-          </p>
           
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-              <div className="text-4xl mb-4">🍝</div>
-              <h3 className="font-cinzel text-2xl font-bold text-deep-red mb-4">Pasta</h3>
-              <p className="font-lato text-espresso-700">
-                From classic spaghetti to gourmet ravioli, our pasta dishes are made fresh daily with authentic sauces.
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="animate-fade-in">
+              <p className="font-lato text-lg text-espresso-800 leading-relaxed mb-6">
+                For over two decades, Napolis Italian Restaurant has been the heart of authentic Italian dining in Tahlequah, Oklahoma. Our journey began with a simple dream: to bring the rich flavors and warm hospitality of Italy to our beloved community.
               </p>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-              <div className="text-4xl mb-4">🍕</div>
-              <h3 className="font-cinzel text-2xl font-bold text-deep-red mb-4">Pizza</h3>
-              <p className="font-lato text-espresso-700">
-                Hand-tossed dough, premium toppings, and melted mozzarella create the perfect Italian pizza experience.
+              <p className="font-lato text-lg text-espresso-800 leading-relaxed mb-6">
+                Every dish is crafted with love, using traditional recipes passed down through generations and the finest ingredients sourced locally and from Italy. From our handmade pasta to our wood-fired pizzas, each bite tells a story of passion and dedication.
               </p>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-              <div className="text-4xl mb-4">🐟</div>
-              <h3 className="font-cinzel text-2xl font-bold text-deep-red mb-4">Seafood</h3>
-              <p className="font-lato text-espresso-700">
-                Fresh seafood prepared with Italian flair, from linguini with clams to our signature seafood combinations.
+              <p className="font-lato text-lg text-espresso-800 leading-relaxed">
+                We're more than just a restaurant – we're a gathering place where families create memories, friends celebrate life, and the community comes together over exceptional food.
               </p>
-            </div>
-          </div>
-
-          <Link 
-            to="/menu"
-            className="inline-block bg-deep-red hover:bg-red-700 text-white font-lato font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-lg"
-          >
-            View Full Menu
-          </Link>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-deep-red mb-8">
-                Visit Us Today
-              </h2>
-              <div className="w-24 h-1 bg-gold-500 mx-auto mb-8"></div>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-12">
-              <div>
-                <h3 className="font-cinzel text-2xl font-bold text-deep-red mb-6">Contact Information</h3>
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-start">
-                    <div className="font-lato text-lg">
-                      <strong className="text-deep-red">Address:</strong><br />
-                      901 S Muskogee Ave<br />
-                      Tahlequah, OK, United States
+            <div className="grid grid-cols-2 gap-4 animate-fade-in">
+              <img 
+                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Restaurant interior" 
+                className="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+              />
+              <img 
+                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Italian pasta" 
+                className="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 mt-8"
+              />
+              <img 
+                src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Pizza preparation" 
+                className="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 -mt-8"
+              />
+              <img 
+                src="https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Wine and dining" 
+                className="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 bg-cream-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="font-cinzel text-4xl font-bold text-deep-red mb-6">What Our Guests Say</h2>
+            <div className="w-24 h-1 bg-gold-500 mx-auto"></div>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardContent className="p-6 text-center">
+                  <div className="flex justify-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 text-gold-500 fill-current" />
+                    ))}
+                  </div>
+                  <p className="font-lato text-espresso-700 mb-4 italic">
+                    "{testimonial.text}"
+                  </p>
+                  <p className="font-cinzel font-semibold text-deep-red">
+                    - {testimonial.name}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Menu Section - Now using the dedicated component */}
+      <MenuSection />
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-olive-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="font-cinzel text-5xl font-bold text-deep-red mb-6">Visit Us</h2>
+            <div className="w-24 h-1 bg-gold-500 mx-auto mb-8"></div>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Info */}
+            <div>
+              <Card className="bg-white shadow-lg p-8 mb-8">
+                <CardContent className="space-y-6">
+                  <div className="flex items-center space-x-4">
+                    <MapPin className="h-6 w-6 text-deep-red" />
+                    <div>
+                      <h3 className="font-cinzel text-xl font-semibold text-deep-red">Address</h3>
+                      <p className="font-lato text-espresso-700">901 S Muskogee Ave<br />Tahlequah, OK, United States</p>
                     </div>
                   </div>
-                  <div className="flex items-center">
-                    <strong className="text-deep-red font-lato">Phone:</strong>
-                    <span className="ml-2 font-lato text-lg">+1 918-207-0870</span>
+                  
+                  <div className="flex items-center space-x-4">
+                    <Phone className="h-6 w-6 text-deep-red" />
+                    <div>
+                      <h3 className="font-cinzel text-xl font-semibold text-deep-red">Phone</h3>
+                      <p className="font-lato text-espresso-700">(918) 207-0870</p>
+                    </div>
                   </div>
-                </div>
-
-                <h3 className="font-cinzel text-2xl font-bold text-deep-red mb-6">Hours</h3>
-                <div className="space-y-2 font-lato text-espresso-700">
-                  <div className="flex justify-between">
-                    <span>Monday - Thursday:</span>
-                    <span>11:00 AM - 9:00 PM</span>
+                  
+                  <div className="flex items-center space-x-4">
+                    <Clock className="h-6 w-6 text-deep-red" />
+                    <div>
+                      <h3 className="font-cinzel text-xl font-semibold text-deep-red">Hours</h3>
+                      <p className="font-lato text-espresso-700">Call for current hours</p>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Friday - Saturday:</span>
-                    <span>11:00 AM - 10:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Sunday:</span>
-                    <span>12:00 PM - 8:00 PM</span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-cinzel text-2xl font-bold text-deep-red mb-6">Find Us</h3>
-                <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-                  <p className="font-lato text-gray-600">Interactive Map Coming Soon</p>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
+              
+              {/* Contact Form */}
+              <Card className="bg-white shadow-lg">
+                <CardContent className="p-8">
+                  <h3 className="font-cinzel text-2xl font-semibold text-deep-red mb-6">Get in Touch</h3>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <Input
+                      placeholder="Your Name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      className="font-lato"
+                    />
+                    <Input
+                      type="email"
+                      placeholder="Your Email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      className="font-lato"
+                    />
+                    <Textarea
+                      placeholder="Your Message"
+                      rows={4}
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      className="font-lato"
+                    />
+                    <Button type="submit" className="w-full bg-deep-red hover:bg-deep-red/90 font-lato">
+                      Send Message
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+            
+            {/* Map */}
+            <div className="h-96 lg:h-full">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3258.8!2d-94.969!3d35.916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87cb7c8!2s901%20S%20Muskogee%20Ave%2C%20Tahlequah%2C%20OK!5e0!3m2!1sen!2sus!4v1"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-lg shadow-lg"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-espresso-900 text-white py-12">
+      <footer className="bg-espresso-900 text-cream-50 py-12">
         <div className="container mx-auto px-4 text-center">
-          <div className="font-cinzel text-3xl font-bold text-gold-400 mb-4">
-            Napoli's Italian Restaurant
+          <div className="flex items-center justify-center space-x-2 mb-6">
+            <ChefHat className="h-8 w-8 text-gold-400" />
+            <span className="font-cinzel text-3xl font-bold">Napolis Italian Restaurant</span>
           </div>
+          
           <p className="font-lato text-lg mb-4">
             Proudly Serving Tahlequah for Over 20 Years
           </p>
-          <p className="font-lato text-sm text-gray-400">
-            © 2024 Napoli's Italian Restaurant. All rights reserved.
+          
+          <div className="flex items-center justify-center space-x-2 mb-6">
+            <Heart className="h-5 w-5 text-deep-red fill-current" />
+            <span className="font-lato">Made with love for our community</span>
+            <Heart className="h-5 w-5 text-deep-red fill-current" />
+          </div>
+          
+          <p className="font-lato text-sm opacity-75">
+            © 2024 Napolis Italian Restaurant. All rights reserved.
           </p>
         </div>
       </footer>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-deep-red hover:bg-deep-red/90 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50 animate-fade-in"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="h-6 w-6" />
+        </button>
+      )}
     </div>
   );
 };
