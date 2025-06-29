@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -39,47 +40,43 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Italian Restaurant Color Palette */
+    --deep-red: 0 65% 35%;
+    --olive-green: 80 30% 40%;
+    --olive-50: 80 30% 95%;
+    --cream-50: 45 100% 97%;
+    --gold-400: 45 100% 60%;
+    --gold-500: 45 100% 50%;
+    --espresso-700: 25 25% 25%;
+    --espresso-800: 25 25% 20%;
+    --espresso-900: 25 25% 15%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -101,5 +98,140 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Lato', sans-serif;
   }
+
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+
+  .font-lato {
+    font-family: 'Lato', sans-serif;
+  }
+
+  .text-shadow-lg {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .bg-deep-red {
+    background-color: hsl(var(--deep-red));
+  }
+
+  .text-deep-red {
+    color: hsl(var(--deep-red));
+  }
+
+  .bg-olive-green {
+    background-color: hsl(var(--olive-green));
+  }
+
+  .text-olive-green {
+    color: hsl(var(--olive-green));
+  }
+
+  .bg-olive-50 {
+    background-color: hsl(var(--olive-50));
+  }
+
+  .bg-cream-50 {
+    background-color: hsl(var(--cream-50));
+  }
+
+  .text-cream-50 {
+    color: hsl(var(--cream-50));
+  }
+
+  .text-gold-400 {
+    color: hsl(var(--gold-400));
+  }
+
+  .bg-gold-400 {
+    background-color: hsl(var(--gold-400));
+  }
+
+  .bg-gold-500 {
+    background-color: hsl(var(--gold-500));
+  }
+
+  .text-gold-500 {
+    color: hsl(var(--gold-500));
+  }
+
+  .text-espresso-700 {
+    color: hsl(var(--espresso-700));
+  }
+
+  .text-espresso-800 {
+    color: hsl(var(--espresso-800));
+  }
+
+  .bg-espresso-900 {
+    background-color: hsl(var(--espresso-900));
+  }
+
+  .border-gold-400 {
+    border-color: hsl(var(--gold-400));
+  }
+
+  .hover\:bg-gold-400:hover {
+    background-color: hsl(var(--gold-400));
+  }
+
+  .hover\:text-deep-red:hover {
+    color: hsl(var(--deep-red));
+  }
+
+  .text-olive-600 {
+    color: hsl(80 30% 30%);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .bg-fixed {
+    background-attachment: fixed;
+  }
+
+  @media (max-width: 768px) {
+    .bg-fixed {
+      background-attachment: scroll;
+    }
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--cream-50));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--deep-red));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--deep-red) / 0.8);
 }
