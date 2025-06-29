@@ -572,7 +572,7 @@ const Menu = () => {
     ]
   };
 
-  // Lunch Specials section
+ // Lunch Specials section
   const lunchSpecials = {
     id: 'lunch-specials',
     title: 'Lunch Specials',
@@ -612,6 +612,7 @@ const Menu = () => {
       'Stromboli - Pepperoni, sausage, Canadian bacon, hamburger, mozzarella cheese wrapped in pizza crust & served with marinara.'
     ]
   };
+
 
   // Beverages section
   const beverages = {
