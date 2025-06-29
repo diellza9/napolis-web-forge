@@ -563,7 +563,7 @@ const MenuSection = () => {
       'Chicken Milano - Sautéed chicken with spinach in a creamy white wine sauce served over spaghetti.',
       'Chicken Pomodoro - Chicken sauteed with fresh tomatoes, basil, olive oil, garlic, light marinara, sherry wine & served over penne pasta.',
       'Fettuccini Alfredo - Creamy white wine sauce served over fettuccini.',
-      'Sausage Pepper Parmigiana - Sausage & peppers sautéed in marinara, topped with mozzarella cheese in sherry wine over spaghetti.',
+      'Sausage Pepper Parmigiana - Sausage & peppers sauteed in marinara, topped with mozzarella cheese in sherry wine over spaghetti.',
       'Chicken Cacciatore - Sauteed with mushrooms, onions, peppers in marinara, served over spaghetti.',
       'Chicken Parmigiana - Lightly breaded & topped with marinara & mozzarella cheese, served over spaghetti.',
       'Spaghetti Carbonara - Sauteed with mushrooms, ham, in a rich cream with a touch of marinara over spaghetti.',
