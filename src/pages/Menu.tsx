@@ -1,9 +1,9 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Search, ArrowUp } from 'lucide-react';
+import { Search, ArrowUp } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 
 interface MenuItem {
   name: string;
@@ -15,17 +15,13 @@ interface MenuItem {
 interface MenuCategory {
   id: string;
   title: string;
-  icon: string;
   items: MenuItem[];
   note?: string;
-  bgColor?: string;
 }
 
 interface BeverageSection {
   id: string;
   title: string;
-  icon: string;
-  bgColor: string;
   price: string;
   items: string[];
 }
@@ -33,8 +29,6 @@ interface BeverageSection {
 interface LunchSpecialSection {
   id: string;
   title: string;
-  icon: string;
-  bgColor: string;
   subtitle: string;
   highPrice: string[];
   lowPrice: string[];
@@ -50,8 +44,6 @@ const Menu = () => {
     {
       id: 'appetizers',
       title: 'Appetizers',
-      icon: '🍤',
-      bgColor: 'bg-orange-50',
       items: [
         {
           name: 'Shrimp Napoleon',
@@ -97,8 +89,6 @@ const Menu = () => {
     {
       id: 'salads',
       title: 'Salads',
-      icon: '🥗',
-      bgColor: 'bg-green-50',
       items: [
         {
           name: 'Greek Salad with Chicken',
@@ -142,8 +132,6 @@ const Menu = () => {
     {
       id: 'specialties',
       title: 'House Specialties',
-      icon: '🍝',
-      bgColor: 'bg-yellow-50',
       items: [
         {
           name: "Napoli's Special",
@@ -241,8 +229,6 @@ const Menu = () => {
     {
       id: 'entrees',
       title: 'Entrees',
-      icon: '🍽️',
-      bgColor: 'bg-red-50',
       items: [
         {
           name: 'Sausage Pizzaiola',
@@ -331,8 +317,6 @@ const Menu = () => {
     {
       id: 'baked',
       title: 'Homemade Baked Pastas',
-      icon: '🧀',
-      bgColor: 'bg-amber-50',
       items: [
         {
           name: 'Baked Ziti',
@@ -385,8 +369,6 @@ const Menu = () => {
     {
       id: 'seafood',
       title: 'Seafood',
-      icon: '🐟',
-      bgColor: 'bg-blue-50',
       items: [
         {
           name: 'Linguini Tuttomare',
@@ -447,8 +429,6 @@ const Menu = () => {
     {
       id: 'chicken-veal',
       title: 'Chicken or Veal',
-      icon: '🍗',
-      bgColor: 'bg-orange-50',
       items: [
         {
           name: 'Arrabbiata',
@@ -503,8 +483,6 @@ const Menu = () => {
     {
       id: 'sandwiches',
       title: 'Sandwiches',
-      icon: '🥪',
-      bgColor: 'bg-yellow-50',
       items: [
         {
           name: 'Calzone',
@@ -546,8 +524,6 @@ const Menu = () => {
     {
       id: 'pizza',
       title: 'Pizza',
-      icon: '🍕',
-      bgColor: 'bg-red-50',
       items: [
         {
           name: 'Cheese',
@@ -580,8 +556,6 @@ const Menu = () => {
   const sauces = {
     id: 'sauces',
     title: 'Sauces',
-    icon: '🥄',
-    bgColor: 'bg-purple-50',
     items: [
       { name: 'Alfredo Sauce', price: '$5.99' },
       { name: 'Alla Panna', price: '$5.99', description: 'Alfredo sauce with a little marinara.' },
@@ -594,8 +568,6 @@ const Menu = () => {
   const lunchSpecials: LunchSpecialSection = {
     id: 'lunch-specials',
     title: 'Lunch Specials',
-    icon: '☀️',
-    bgColor: 'bg-gradient-to-br from-yellow-50 to-orange-50',
     subtitle: 'Tuesday – Friday 11:00am – 3:00pm (includes tossed salad)',
     highPrice: [
       'Chicken Alfredo - Chicken breast in a creamy white wine sauce served over fettuccini.',
@@ -635,8 +607,6 @@ const Menu = () => {
   const beverages: BeverageSection = {
     id: 'beverages',
     title: 'Beverages',
-    icon: '☕',
-    bgColor: 'bg-brown-50',
     price: '$2.29',
     items: [
       'Pepsi', 'Diet Pepsi', 'Dr. Pepper', 'Diet Dr. Pepper', 'Mist', 'Mountain Dew',
@@ -646,21 +616,21 @@ const Menu = () => {
 
   // Navigation items
   const navItems = [
-    { id: 'appetizers', label: 'Appetizers', icon: '🍤' },
-    { id: 'salads', label: 'Salads', icon: '🥗' },
-    { id: 'specialties', label: 'House Specialties', icon: '🍝' },
-    { id: 'entrees', label: 'Entrees', icon: '🍽️' },
-    { id: 'baked', label: 'Baked Pastas', icon: '🧀' },
-    { id: 'seafood', label: 'Seafood', icon: '🐟' },
-    { id: 'chicken-veal', label: 'Chicken/Veal', icon: '🍗' },
-    { id: 'sandwiches', label: 'Sandwiches', icon: '🥪' },
-    { id: 'pizza', label: 'Pizza', icon: '🍕' },
-    { id: 'sauces', label: 'Sauces', icon: '🥄' },
-    { id: 'lunch-specials', label: 'Lunch Specials', icon: '☀️' },
-    { id: 'beverages', label: 'Beverages', icon: '☕' }
+    { id: 'appetizers', label: 'Appetizers' },
+    { id: 'salads', label: 'Salads' },
+    { id: 'specialties', label: 'House Specialties' },
+    { id: 'entrees', label: 'Entrees' },
+    { id: 'baked', label: 'Baked Pastas' },
+    { id: 'seafood', label: 'Seafood' },
+    { id: 'chicken-veal', label: 'Chicken/Veal' },
+    { id: 'sandwiches', label: 'Sandwiches' },
+    { id: 'pizza', label: 'Pizza' },
+    { id: 'sauces', label: 'Sauces' },
+    { id: 'lunch-specials', label: 'Lunch Specials' },
+    { id: 'beverages', label: 'Beverages' }
   ];
 
-  // Filter menu items based on search - with proper type checking
+  // Filter menu items based on search
   const filterMenuItems = (items: MenuItem[]) => {
     if (!searchTerm) return items;
     return items.filter(item => 
@@ -715,26 +685,26 @@ const Menu = () => {
   };
 
   return (
-    <div className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-deep-red text-white py-12">
+      <div className="bg-deep-red text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="font-cinzel text-4xl md:text-6xl font-bold mb-4">Our Menu</h1>
-          <p className="font-lato text-xl max-w-2xl mx-auto">
+          <h1 className="font-cinzel text-5xl md:text-7xl font-bold mb-6">Our Menu</h1>
+          <p className="font-lato text-xl max-w-2xl mx-auto text-cream-50">
             Authentic Italian cuisine crafted with love and tradition
           </p>
         </div>
       </div>
 
       {/* Search Bar */}
-      <div className="sticky top-0 z-40 bg-white shadow-lg border-b-2 border-gold-400">
+      <div className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200">
         <div className="container mx-auto px-4 py-4">
           <div className="relative max-w-md mx-auto">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
             <Input
               type="text"
               placeholder="Search menu items..."
-              className="pl-10 py-2 border-2 border-gray-200 focus:border-deep-red"
+              className="pl-10 py-3 border border-gray-300 focus:border-deep-red focus:ring-1 focus:ring-deep-red rounded-lg"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -743,22 +713,21 @@ const Menu = () => {
       </div>
 
       {/* Navigation */}
-      <div className="sticky top-16 z-30 bg-white shadow-md">
+      <div className="sticky top-16 z-30 bg-white border-b border-gray-200">
         <ScrollArea className="w-full">
-          <div className="flex space-x-1 p-2 min-w-max">
+          <div className="flex space-x-1 p-3 min-w-max">
             {navItems.map((item) => (
               <Button
                 key={item.id}
-                variant={activeSection === item.id ? "default" : "ghost"}
-                className={`flex items-center space-x-2 whitespace-nowrap px-4 py-2 ${
+                variant="ghost"
+                className={`whitespace-nowrap px-4 py-2 font-lato text-sm transition-colors ${
                   activeSection === item.id 
                     ? 'bg-deep-red text-white' 
-                    : 'hover:bg-deep-red hover:text-white'
+                    : 'text-gray-700 hover:bg-gray-100 hover:text-deep-red'
                 }`}
                 onClick={() => scrollToSection(item.id)}
               >
-                <span className="text-lg">{item.icon}</span>
-                <span className="font-lato text-sm">{item.label}</span>
+                {item.label}
               </Button>
             ))}
           </div>
@@ -766,7 +735,7 @@ const Menu = () => {
       </div>
 
       {/* Menu Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-12">
         {/* Regular Menu Categories */}
         {menuCategories.map((category) => {
           const filteredItems = filterMenuItems(category.items);
@@ -776,39 +745,40 @@ const Menu = () => {
             <section
               key={category.id}
               ref={(el) => { sectionRefs.current[category.id] = el; }}
-              className={`mb-12 rounded-lg shadow-lg overflow-hidden ${category.bgColor}`}
+              className="mb-16"
             >
-              <div className="bg-white p-6 border-l-4 border-deep-red">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">{category.icon}</span>
-                  <h2 className="font-cinzel text-3xl font-bold text-deep-red">
-                    {category.title}
-                  </h2>
-                </div>
+              <div className="mb-8">
+                <h2 className="font-cinzel text-4xl font-bold text-deep-red mb-4">
+                  {category.title}
+                </h2>
+                <div className="w-16 h-0.5 bg-deep-red mb-6"></div>
                 {category.note && (
-                  <p className="font-lato text-sm text-espresso-600 italic mb-6 bg-olive-50 p-3 rounded">
+                  <p className="font-lato text-sm text-gray-600 italic mb-6 bg-gray-50 p-4 rounded-lg">
                     {category.note}
                   </p>
                 )}
-                <div className="grid md:grid-cols-2 gap-6">
-                  {filteredItems.map((item, index) => (
-                    <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-cinzel font-semibold text-deep-red text-lg flex-1">
-                          {item.name}
-                        </h3>
-                        <span className="font-lato font-bold text-gold-500 text-lg ml-4">
-                          {item.vealPrice ? `C-${item.price} / V-${item.vealPrice}` : item.price}
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                {filteredItems.map((item, index) => (
+                  <div key={index} className="border-b border-dotted border-gray-300 pb-6 mb-6 last:border-b-0 last:mb-0">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="font-lato font-bold text-lg text-gray-900 flex-1 pr-4">
+                        {item.name}
+                      </h3>
+                      <div className="text-right">
+                        <span className="inline-block bg-deep-red text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          {item.vealPrice ? `C ${item.price} / V ${item.vealPrice}` : item.price}
                         </span>
                       </div>
-                      {item.description && (
-                        <p className="font-lato text-espresso-700 italic text-sm leading-relaxed">
-                          {item.description}
-                        </p>
-                      )}
                     </div>
-                  ))}
-                </div>
+                    {item.description && (
+                      <p className="font-lato text-gray-600 italic text-sm leading-relaxed">
+                        {item.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </section>
           );
@@ -817,71 +787,79 @@ const Menu = () => {
         {/* Sauces Section */}
         <section
           ref={(el) => { sectionRefs.current['sauces'] = el; }}
-          className={`mb-12 rounded-lg shadow-lg overflow-hidden ${sauces.bgColor}`}
+          className="mb-16"
         >
-          <div className="bg-white p-6 border-l-4 border-deep-red">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl">{sauces.icon}</span>
-              <h2 className="font-cinzel text-3xl font-bold text-deep-red">
-                {sauces.title}
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              {sauces.items.map((sauce, index) => (
-                <div key={index} className="flex justify-between items-start border-b border-gray-200 pb-2">
-                  <div className="flex-1">
-                    <h3 className="font-cinzel font-semibold text-deep-red">{sauce.name}</h3>
-                    {sauce.description && (
-                      <p className="font-lato text-espresso-700 italic text-sm">{sauce.description}</p>
-                    )}
-                  </div>
-                  <span className="font-lato font-bold text-gold-500 ml-4">{sauce.price}</span>
+          <div className="mb-8">
+            <h2 className="font-cinzel text-4xl font-bold text-deep-red mb-4">
+              {sauces.title}
+            </h2>
+            <div className="w-16 h-0.5 bg-deep-red mb-6"></div>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {sauces.items.map((sauce, index) => (
+              <div key={index} className="flex justify-between items-start border-b border-dotted border-gray-300 pb-4">
+                <div className="flex-1">
+                  <h3 className="font-lato font-bold text-lg text-gray-900">{sauce.name}</h3>
+                  {sauce.description && (
+                    <p className="font-lato text-gray-600 italic text-sm">{sauce.description}</p>
+                  )}
                 </div>
-              ))}
-            </div>
+                <span className="inline-block bg-deep-red text-white px-3 py-1 rounded-full text-sm font-semibold ml-4">
+                  {sauce.price}
+                </span>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* Lunch Specials Section */}
         <section
           ref={(el) => { sectionRefs.current['lunch-specials'] = el; }}
-          className={`mb-12 rounded-lg shadow-lg overflow-hidden ${lunchSpecials.bgColor}`}
+          className="mb-16"
         >
-          <div className="bg-white p-6 border-l-4 border-deep-red">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-3xl">{lunchSpecials.icon}</span>
-              <h2 className="font-cinzel text-3xl font-bold text-deep-red">
-                {lunchSpecials.title}
-              </h2>
-            </div>
-            <p className="font-lato text-espresso-700 mb-6 font-semibold">
+          <div className="mb-8">
+            <h2 className="font-cinzel text-4xl font-bold text-deep-red mb-4">
+              {lunchSpecials.title}
+            </h2>
+            <div className="w-16 h-0.5 bg-deep-red mb-6"></div>
+            <p className="font-lato text-gray-700 text-lg font-medium">
               {lunchSpecials.subtitle}
             </p>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-yellow-50 p-6 rounded-lg">
-                <h3 className="font-cinzel text-2xl font-bold text-deep-red mb-4 text-center">$11.99</h3>
-                <div className="space-y-3">
-                  {lunchSpecials.highPrice.map((item, index) => (
-                    <div key={index} className="p-3 bg-white rounded shadow-sm">
-                      <p className="font-lato text-sm text-espresso-700">
-                        • {item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <div className="text-center mb-6">
+                <span className="inline-block bg-deep-red text-white px-6 py-2 rounded-full text-xl font-bold">
+                  $11.99
+                </span>
               </div>
-              <div className="bg-orange-50 p-6 rounded-lg">
-                <h3 className="font-cinzel text-2xl font-bold text-deep-red mb-4 text-center">$10.99</h3>
-                <div className="space-y-3">
-                  {lunchSpecials.lowPrice.map((item, index) => (
-                    <div key={index} className="p-3 bg-white rounded shadow-sm">
-                      <p className="font-lato text-sm text-espresso-700">
-                        • {item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+              <div className="space-y-4">
+                {lunchSpecials.highPrice.map((item, index) => (
+                  <div key={index} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
+                    <p className="font-lato text-gray-800 text-sm leading-relaxed">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div>
+              <div className="text-center mb-6">
+                <span className="inline-block bg-olive-green text-white px-6 py-2 rounded-full text-xl font-bold">
+                  $10.99
+                </span>
+              </div>
+              <div className="space-y-4">
+                {lunchSpecials.lowPrice.map((item, index) => (
+                  <div key={index} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
+                    <p className="font-lato text-gray-800 text-sm leading-relaxed">
+                      {item}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -890,28 +868,27 @@ const Menu = () => {
         {/* Beverages Section */}
         <section
           ref={(el) => { sectionRefs.current['beverages'] = el; }}
-          className={`mb-12 rounded-lg shadow-lg overflow-hidden ${beverages.bgColor}`}
+          className="mb-16"
         >
-          <div className="bg-white p-6 border-l-4 border-deep-red">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl">{beverages.icon}</span>
-              <h2 className="font-cinzel text-3xl font-bold text-deep-red">
-                {beverages.title} - {beverages.price}
-              </h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              {filterStringItems(beverages.items).map((beverage, index) => (
-                <p key={index} className="font-lato text-espresso-700 p-2 bg-cream-50 rounded">
-                  • {beverage}
-                </p>
-              ))}
-            </div>
+          <div className="mb-8">
+            <h2 className="font-cinzel text-4xl font-bold text-deep-red mb-4">
+              {beverages.title} - {beverages.price}
+            </h2>
+            <div className="w-16 h-0.5 bg-deep-red mb-6"></div>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {filterStringItems(beverages.items).map((beverage, index) => (
+              <div key={index} className="text-center p-3 bg-gray-50 rounded-lg">
+                <p className="font-lato text-gray-800 font-medium">{beverage}</p>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* Footer Note */}
-        <div className="text-center bg-olive-50 rounded-lg p-6 shadow-lg">
-          <p className="font-lato text-espresso-800 font-semibold text-lg">
+        <div className="text-center bg-cream-50 rounded-lg p-8 border border-gray-200">
+          <p className="font-lato text-gray-800 font-semibold text-lg">
             All dishes come with fresh baked Italian dinner rolls.
           </p>
         </div>
@@ -921,7 +898,7 @@ const Menu = () => {
       {showBackToTop && (
         <Button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 bg-deep-red hover:bg-red-700 text-white p-3 rounded-full shadow-lg"
+          className="fixed bottom-8 right-8 z-50 bg-deep-red hover:bg-red-700 text-white p-3 rounded-full shadow-lg transition-all duration-300"
           size="icon"
         >
           <ArrowUp className="h-5 w-5" />
