@@ -551,42 +551,40 @@ const MenuSection = () => {
     { name: 'Marinara Sauce', price: '$3.50' }
   ];
 
-  const lunchSpecials = {
-    title: 'Lunch Specials',
-    subtitle: 'Tuesday – Friday 11:00am – 3:00pm (includes tossed salad)',
-    highPrice: [
-      'Chicken Alfredo - Chicken breast in a creamy white wine sauce served over fettuccini.',
-      'Chicken Marsala - Sauteed with mushrooms in a rich marsala wine, served over spaghetti.',
-      'Chicken Piccata - Sauteed with capers in white wine & lemon butter, served over spaghetti.',
-      'Tortellini Alla Panna - Cheese tortellini sauteed in cream sauce with a touch of marinara.',
-      'Chicken Broccoli - Chicken, broccoli in white cream over tortellini.',
-      'Chicken Milano - Sautéed chicken with spinach in a creamy white wine sauce served over spaghetti.',
-      'Chicken Pomodoro - Chicken sauteed with fresh tomatoes, basil, olive oil, garlic, light marinara, sherry wine & served over penne pasta.',
-      'Fettuccini Alfredo - Creamy white wine sauce served over fettuccini.',
-      'Sausage Pepper Parmigiana - Sausage & peppers sauteed in marinara, topped with mozzarella cheese in sherry wine over spaghetti.',
-      'Chicken Cacciatore - Sauteed with mushrooms, onions, peppers in marinara, served over spaghetti.',
-      'Chicken Parmigiana - Lightly breaded & topped with marinara & mozzarella cheese, served over spaghetti.',
-      'Spaghetti Carbonara - Sauteed with mushrooms, ham, in a rich cream with a touch of marinara over spaghetti.',
-      'Eggplant Parmigiana - Breaded & topped with marinara & mozzarella cheese, served over spaghetti.'
-    ],
-    lowPrice: [
-      'Baked Ziti - Penne pasta, ricotta cheese and marinara topped with mozzarella cheese.',
-      'Eggplant Rollatini - Breaded & stuffed with ricotta cheese, topped with marinara & mozzarella cheese.',
-      'Meat Ravioli - Ravioli pasta stuffed with beef & topped with marinara and mozzarella cheese.',
-      'Spaghetti with (Choose One...) - Marinara sauce, meatballs, meat sauce, mushrooms, olive oil + garlic, basil, or sausage. ADD ANOTHER FOR $1.00 EACH',
-      'Calzone - Canadian Bacon, mozzarella & ricotta cheese wrapped in a pizza crust & served with marinara.',
-      'Lasagna - Pasta layered with beef & mozzarella cheese topped with marinara & mozzarella cheese.',
-      'Minestrone Soup - Mixed vegetables & chicken base.',
-      'Spinach Ravioli - Ravioli pasta stuffed with spinach & topped with marinara and mozzarella cheese.',
-      'Chicken Caesar Salad - Chicken served on fresh romaine lettuce, tossed with homemade Caesar dressing and croutons.',
-      'Greek Salad (with or without chicken) - Lettuce, fresh tomatoes, black olives, feta cheese, onions, balsamic vinegar and olive oil dressing.',
-      'Cheese Ravioli - Ravioli pasta stuffed with ricotta cheese, topped with marinara & mozzarella cheese.',
-      'Manicotti - Pasta rolled & stuffed with ricotta, mozzarella cheese, topped with marinara & mozzarella cheese.',
-      'Pasta Sampler - Meat ravioli, lasagna & manicotti.',
-      'Spinach Calzone - Spinach, mozzarella cheese, ricotta cheese wrapped in pizza crust served with marinara.',
-      'Stromboli - Pepperoni, sausage, Canadian bacon, hamburger, mozzarella cheese wrapped in pizza crust & served with marinara.'
-    ]
-  };
+  {/* Lunch Specials */}
+        <div className="mt-12 bg-white rounded-lg shadow-lg p-8">
+          <h3 className="font-cinzel text-2xl font-bold text-deep-red mb-4">
+            {lunchSpecials.title}
+          </h3>
+          <p className="font-lato text-espresso-700 mb-6 font-semibold">
+            {lunchSpecials.subtitle}
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h4 className="font-cinzel text-xl font-bold text-gold-500 mb-4">$11.99</h4>
+              <ul className="space-y-2">
+                {lunchSpecials.highPrice.map((item, index) => (
+                  <li key={index} className="font-lato text-sm text-espresso-700">
+                    • {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-cinzel text-xl font-bold text-gold-500 mb-4">$10.99</h4>
+              <ul className="space-y-2">
+                {lunchSpecials.lowPrice.map((item, index) => (
+                  <li key={index} className="font-lato text-sm text-espresso-700">
+                    • {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+     
 
   const beverages = [
     'Pepsi', 'Diet Pepsi', 'Dr. Pepper', 'Diet Dr. Pepper', 'Mist', 'Mountain Dew',
