@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ChefHat, MapPin, Phone, Mail, Clock, Star, Utensils, Heart, ArrowUp } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
+import MenuSection from "@/components/MenuSection";
 
 const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -233,40 +233,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Menu Section */}
-      <section id="menu" className="py-20 bg-deep-red text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-32 h-32 border-2 border-gold-400 rounded-full"></div>
-          <div className="absolute bottom-20 right-20 w-24 h-24 border-2 border-gold-400 rounded-full"></div>
-          <div className="absolute top-1/2 left-1/4 w-16 h-16 border-2 border-gold-400 rounded-full"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="font-cinzel text-5xl font-bold mb-6">Our Menu</h2>
-          <div className="w-24 h-1 bg-gold-500 mx-auto mb-12"></div>
-          
-          <div className="max-w-2xl mx-auto">
-            <Utensils className="h-24 w-24 text-gold-400 mx-auto mb-8" />
-            <p className="font-lato text-xl mb-8 opacity-90">
-              We're putting the finishing touches on our complete menu presentation. 
-              Our chefs are working hard to showcase our authentic Italian specialties.
-            </p>
-            <p className="font-cinzel text-2xl text-gold-400 mb-8">
-              Full Menu Coming Soon
-            </p>
-            <p className="font-lato text-lg mb-8">
-              In the meantime, call us at <span className="text-gold-400 font-semibold">(918) 207-0870</span> 
-              to learn about today's specials and make a reservation.
-            </p>
-            <Button 
-              variant="outline" 
-              className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-deep-red font-lato"
-            >
-              Call for Today's Specials
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Menu Section - Now using the dedicated component */}
+      <MenuSection />
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-olive-50">
